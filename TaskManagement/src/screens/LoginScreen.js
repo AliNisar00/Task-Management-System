@@ -7,10 +7,8 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.contentContainer}>
-                <Title style={styles.title}>Welcome to FitTrack</Title>
-                <Subheading style={styles.subtitle}>Your personal fitness companion</Subheading>
-
-                {/* Add any login or authentication components here */}
+                <Title style={styles.title}>Welcome to STMS</Title>
+                <Subheading style={styles.subtitle}>Your personal student task manager</Subheading>
             </View>
 
             <View style={styles.buttonContainer}>

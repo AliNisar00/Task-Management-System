@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 18,
         marginBottom: 32,
+        color: 'grey',
     },
     buttonContainer: {
         width: '100%',

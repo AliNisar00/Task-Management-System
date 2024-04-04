@@ -34,8 +34,12 @@ const AccountLoginScreen = ({ navigation }) => {
   
         // Navigate to TabNavigator upon successful login
         navigation.navigate('Home', { userName: data.userName });
-      } else {
         // Handle authentication errors
+      } else if (response.status == 401) {
+        throw new Error(data.message || 'Incorrect username or password');
+      } else if (response.status == 400) {
+        throw new Error(data.message || 'Missing username or password');
+      } else {
         throw new Error(data.message || 'Sign in failed');
       }
     } catch (error) {

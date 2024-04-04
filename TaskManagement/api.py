@@ -34,10 +34,11 @@ def signup():
             username = request.json.get('username')
             password = request.json.get('password')
             major = request.json.get('major')
+            class_year = request.json.get('class_year')
             uni = request.json.get('uni')
 
             # Check if username and password are provided
-            if not username or not password or not major or not uni:
+            if not username or not password or not major or not class_year or not uni:
                 return jsonify({'error': 'Missing entries'}), 400
 
             # Check if username already exists in the database
@@ -50,6 +51,7 @@ def signup():
                 "username": username,
                 "password": password,
                 "major": major,
+                "class_year": class_year,
                 "uni": uni
             }
 

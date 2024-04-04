@@ -8,6 +8,7 @@ const AccountSignup = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [major, setMajor] = useState("");
+  const [class_year, setClass_year] = useState("");
   const [uni, setUni] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,6 +25,7 @@ const AccountSignup = ({ navigation }) => {
             username: username,
             password: password,
             major: major,
+            class_year: class_year,
             uni: uni,
         }),
       });
@@ -95,6 +97,16 @@ const AccountSignup = ({ navigation }) => {
           label="Major"
           value={major}
           onChangeText={(text) => setMajor(text)}
+          mode="outlined"
+          style={styles.input}
+          theme={{ colors: { primary: 'white' } }}
+        />
+
+        {/* Class Input */}
+        <TextInput
+          label="Class"
+          value={class_year}
+          onChangeText={(text) => setClass_year(text)}
           mode="outlined"
           style={styles.input}
           theme={{ colors: { primary: 'white' } }}

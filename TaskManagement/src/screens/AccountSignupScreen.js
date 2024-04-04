@@ -15,7 +15,7 @@ const AccountSignup = ({ navigation }) => {
     setLoading(true);
     try {
       // Call your Flask API to authenticate the user
-      const response = await fetch('http://192.168.18.77:5000/signup', {
+      const response = await fetch('http://10.20.4.127:5000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

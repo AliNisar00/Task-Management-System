@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AccountLoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -13,12 +13,12 @@ const AccountLoginScreen = ({ navigation }) => {
     setLoading(true);
     try {
       // Call your Flask API to authenticate the user
-      const response = await fetch('http://192.168.18.77:5000/login', {
+      const response = await fetch('http://10.20.4.127:5000/login', { // original: 192.168.18.77
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: email, password: password }),
+        body: JSON.stringify({ username: username, password: password }),
       });
 
       //console.log(response.status);
@@ -51,14 +51,14 @@ const AccountLoginScreen = ({ navigation }) => {
       <View style={styles.contentContainer}>
         <Title style={styles.title}>Account Login</Title>
         <Subheading style={styles.subtitle}>
-          Enter your email and password to log in.
+          Enter your username and password to log in.
         </Subheading>
 
-        {/* Email Input */}
+        {/* Username Input */}
         <TextInput
-          label="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
+          label="Username"
+          value={username}
+          onChangeText={(text) => setUsername(text)}
           mode="outlined"
           style={styles.input}
           theme={{ colors: { primary: 'white'} }}

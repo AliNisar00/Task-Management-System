@@ -7,7 +7,7 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.contentContainer}>
-                <Title style={styles.title}>Welcome to STMS</Title>
+                <Title style={styles.title}>Welcome to Tasker</Title>
                 <Subheading style={styles.subtitle}>Your personal student task manager</Subheading>
             </View>
 
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 18,
         marginBottom: 32,
+        color: 'grey',
     },
     buttonContainer: {
         width: '100%',

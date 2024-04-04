@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     marginBottom: 16,
-    color: "white",
+    color: "grey",
   },
   input: {
     marginBottom: 16,

@@ -29,7 +29,6 @@ def login():
 
     return jsonify({'message': 'Login successful'}), 200
 
-
 @app.route('/signup', methods=['POST'])
 def signup():
             username = request.json.get('username')
@@ -59,12 +58,16 @@ def signup():
 
             return jsonify({'message': 'Signup successful'}), 201
             
-
-
 @app.route('/users')
 def users():
       users=mongo.db.Login_Details.find()
       return dumps(users)
 
+""" Tester GET route
+@app.route('/scam', methods=['GET'])
+def scam():
+      return jsonify({"You": "is SCAm"})
+"""
+
 if __name__=="__main__":
-    app.run(host='0.0.0.0',debug=True) 
+    app.run(host='0.0.0.0',debug=True)

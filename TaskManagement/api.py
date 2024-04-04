@@ -36,9 +36,9 @@ def signup():
             major = request.json.get('major')
             uni = request.json.get('uni')
 
-            # Check if username and passwor  d are provided
-            if not username or not password:
-                return jsonify({'error': 'Username and password are required'}), 400
+            # Check if username and password are provided
+            if not username or not password or not major or not uni:
+                return jsonify({'error': 'Missing entries'}), 400
 
             # Check if username already exists in the database
             existing_user = mongo.db.Login_Details.find_one({'username': username})

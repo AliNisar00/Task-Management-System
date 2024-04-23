@@ -5,7 +5,7 @@ const ProfilePic = () => {
   return (
     <View>
       <Image 
-        source={require('../assets/avatar.png')}
+        source={require('../../src/assets/avatar.png')}
         style={styles.Image}
       />
     </View>

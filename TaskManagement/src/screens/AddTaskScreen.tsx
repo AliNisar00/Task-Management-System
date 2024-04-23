@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   HeaderContainer: {
+    marginTop: 35,
     padding: 30,
     flexDirection: 'row',
     alignItems: 'center',

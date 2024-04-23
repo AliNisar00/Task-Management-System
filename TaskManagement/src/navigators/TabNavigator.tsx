@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     height: 80,
     position: 'absolute',
-    backgroundColor: 0x000000,
+    backgroundColor: 'black',
     borderTopWidth: 0,
     elevation: 0,
     borderTopColor: 'transparent',

@@ -3,12 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const AddTaskScreen = () => {
   return (
-    <View>
+    <View style={styles.ScreenContainer}>
       <Text>AddTaskScreen</Text>
     </View>
   )
 };
 
-export default AddTaskScreen;
+const styles = StyleSheet.create({
+  ScreenContainer: {
+      flex: 1,
+      backgroundColor: 'black',
+  },
+});
 
-const styles = StyleSheet.create({});
+export default AddTaskScreen;

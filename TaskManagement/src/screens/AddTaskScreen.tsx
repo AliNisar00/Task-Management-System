@@ -8,7 +8,6 @@ const AddTaskScreen = () => {
       <View style={styles.HeaderContainer}>
         <Text style={styles.HeaderText}>Add Task</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.ScrollViewFlex} />
     </View>
   )
 };
@@ -17,9 +16,6 @@ const styles = StyleSheet.create({
   ScreenContainer: {
       flex: 1,
       backgroundColor: 'black',
-  },
-  ScrollViewFlex: {
-    flexGrow: 1,
   },
   HeaderContainer: {
     marginTop: 35,

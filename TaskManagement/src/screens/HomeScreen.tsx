@@ -7,7 +7,6 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.ScreenContainer}>
             <StatusBar backgroundColor={'black'} />
             <HeaderBar title='Home' />
-            <ScrollView contentContainerStyle={styles.ScrollViewFlex} />
         </View>
     )
 };
@@ -16,9 +15,6 @@ const styles = StyleSheet.create({
     ScreenContainer: {
         flex: 1,
         backgroundColor: 'black',
-    },
-    ScrollViewFlex: {
-        flexGrow: 1,
     },
 });
 

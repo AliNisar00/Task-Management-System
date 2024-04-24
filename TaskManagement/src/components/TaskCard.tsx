@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const TaskCard = ({ task, priority }) => {
+const TaskCard = ({ task }) => {
   // Determine the color based on the priority
   let priorityColor;
-  switch (priority) {
+  switch (task.priority) {
     case 'H':
       priorityColor = 'red'; // Blood red
       break;
@@ -27,7 +27,7 @@ const TaskCard = ({ task, priority }) => {
       end={{ x: 1, y: 1 }}
     >
       {/* Priority indicator */}
-      {priority && (
+      {task.priority && (
         <View style={[styles.priorityIndicator, { backgroundColor: priorityColor }]} />
       )}
 

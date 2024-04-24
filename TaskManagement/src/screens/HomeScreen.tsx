@@ -29,6 +29,8 @@ const HomeScreen = ({ navigation }) => {
                 {tasks.map((task, index) => (
                 <TaskCard key={index} task={task} />
                 ))}
+                {/* Additional padding at the bottom to avoid overlap with tab navigator */}
+                <View style={styles.bottomPadding} />
             </ScrollView>
         </View>
     )
@@ -42,6 +44,9 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         paddingVertical: 20,
         paddingHorizontal: 10,
+    },
+    bottomPadding: {
+        height: 50,
     },
 });
 

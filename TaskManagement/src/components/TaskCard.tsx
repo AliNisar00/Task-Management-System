@@ -15,7 +15,7 @@ interface CoffeeCardProp {
 
 const TaskCard: React.FC<CoffeeCardProp> = ({taskId, name, course, priority, dueDate, onPressHandler}) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.card}>
       <View style={styles.cardName}>
         <Text style={styles.textName}>
           {name}
@@ -38,11 +38,22 @@ const TaskCard: React.FC<CoffeeCardProp> = ({taskId, name, course, priority, due
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 16,
+    shadowColor: 'black',
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 14,
+    width: 350,
+    height: 350,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
   },
   cardName: {},
   cardCourse: {},

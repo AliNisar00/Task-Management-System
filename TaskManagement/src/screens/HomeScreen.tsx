@@ -14,11 +14,18 @@ const HomeScreen = ({ navigation }) => {
     const fetchTasks = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://10.20.5.58/homepage/660e88ce1d3eba857b420554');
+            
+            //const response = await fetch('http://10.20.5.58:5000/homepage/660e88ce1d3eba857b420554', { // local device - ERROR
+            const response = await fetch('http://10.0.2.2:5000/homepage/660e88ce1d3eba857b420554', { // android emulator
+                method: 'GET',
+            });
             if (!response.ok) {
                 throw new Error('Failed to fetch tasks');
             }
             const data = await response.json();
+
+            //console.log(data);
+
             const processedTasks = data.map(task => ({
                 taskId: task._id.$oid,
                 name: task.task_name,

@@ -47,7 +47,7 @@ def login():
 
 @app.route('/homepage/<user_id>')
 def homepage(user_id):
-    tasks = mongo.db.Task_Details.find({"user_id ": user_id})
+    tasks = mongo.db.Task_Details.find({"user_id": ObjectId(user_id)},{"user_id":0})
 
     #converting the cursor object Tasks to JSON serializable format
     task_list = [task for task in tasks]
@@ -103,19 +103,19 @@ def add_task(userid):
                 user_id = userid
                 task_name = request.json.get('task_name')
                 task_course = request.json.get('task_course')
-                task_date= request.json.get("task_date")
+                task_duedate= request.json.get("task_duedate")
                 task_priority= request.json.get("task_priority")
 
                 # Check if username, task_name, and task_description are provided
-                if not user_id or not task_name or not task_course or not task_date or not task_priority:
+                if not task_name or not task_course or not task_duedate or not task_priority:
                     return jsonify({'error': 'Username, task name, and task description are required'}), 400
 
                 # Create a new task document
                 new_task = {
-                    "user_id": userid,
+                    "user_id": ObjectId(user_id),
                     "task_name": task_name,
                     "task_course": task_course,
-                    "task_duedate": task_date,
+                    "task_duedate": task_duedate,
                     "task_priority": task_priority
                 }
 

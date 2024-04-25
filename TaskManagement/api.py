@@ -42,12 +42,12 @@ def login():
         return jsonify({'error': 'Invalid password'}), 401
 
 
-    return jsonify({'message': 'Login successful'+ str(existing_user["_id"])}), 200
+    return jsonify(existing_user["_id"]), 200
     # return redirect(url_for('homepage', username=username))
 
 @app.route('/homepage/<user_id>')
-def homepage(username):
-    tasks = mongo.db.Task_Details.find({"username ": username})
+def homepage(user_id):
+    tasks = mongo.db.Task_Details.find({"user_id ": user_id})
 
     #converting the cursor object Tasks to JSON serializable format
     task_list = [task for task in tasks]

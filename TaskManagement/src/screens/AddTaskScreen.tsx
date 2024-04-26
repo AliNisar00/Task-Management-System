@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, StyleSheet, TextInput, Button } from 'react-native';
+import { View, ScrollView, StyleSheet, TextInput, Button, Text, StatusBar } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddTaskScreen = () => {
@@ -27,16 +27,22 @@ const AddTaskScreen = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'black'} />
+      <View style={styles.HeaderContainer}>
+        <Text style={styles.HeaderText}>Add Task</Text>
+      </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <TextInput
           style={styles.input}
           placeholder="Name"
+          placeholderTextColor="grey"
           value={name}
           onChangeText={setName}
         />
         <TextInput
           style={styles.input}
           placeholder="Course"
+          placeholderTextColor="grey"
           value={course}
           onChangeText={setCourse}
         />
@@ -85,9 +91,20 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
+    color: '#fff',
   },
   datePickerContainer: {
     marginBottom: 10,
+  },
+  HeaderContainer: {
+    padding: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  HeaderText: {
+    fontSize: 20,
+    color: '#FFFFFF',
   },
 });
 

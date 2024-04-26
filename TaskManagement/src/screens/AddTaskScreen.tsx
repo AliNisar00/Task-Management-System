@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TextInput, Button, Text, StatusBar } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import RNPickerSelect from 'react-native-picker-select';
 
 const AddTaskScreen = () => {
   const [task, settask] = useState([]);
@@ -60,12 +61,47 @@ const AddTaskScreen = () => {
             />
           )}
         </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Priority"
-          value={priority}
-          onChangeText={setPriority}
-        />
+        <View style={styles.inputContainer}>
+          <Text>Priority</Text>
+          <RNPickerSelect
+            value={priority}
+            onValueChange={(value) => setPriority(value)}
+            items={[
+              { label: 'Priority: High', value: 'H' },
+              { label: 'Priority: Medium', value: 'M' },
+              { label: 'Priority: Low', value: 'L' },
+            ]}
+            placeholder={{}}
+            style={{
+              inputIOS: {
+                ...styles.input,
+                ...styles.greyText,
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                borderWidth: 1,
+                borderColor: '#fff',
+                borderRadius: 5,
+              },
+              inputAndroid: {
+                ...styles.input,
+                ...styles.greyText,
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                borderWidth: 1,
+                borderColor: '#fff',
+                borderRadius: 5,
+              },
+              iconContainer: {
+                top: 10,
+                right: 12,
+              },
+              placeholder: {
+                color: '#999',
+              },
+            }}
+            useNativeAndroidPickerStyle={false}
+          />
+        </View>
         <Button
           title="Confirm"
           onPress={handleAddTask}
@@ -84,6 +120,9 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
+  },
+  inputContainer: {
+    marginBottom: 10,
   },
   input: {
     marginBottom: 10,
@@ -105,6 +144,9 @@ const styles = StyleSheet.create({
   HeaderText: {
     fontSize: 20,
     color: '#FFFFFF',
+  },
+  greyText: {
+    color: 'grey',
   },
 });
 

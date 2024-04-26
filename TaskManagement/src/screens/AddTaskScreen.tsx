@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TextInput, Button, Text, StatusBar } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const AddTaskScreen = () => {
   const [task, settask] = useState([]);
@@ -75,21 +77,23 @@ const AddTaskScreen = () => {
             style={{
               inputIOS: {
                 ...styles.input,
-                ...styles.greyText,
+                ...styles.whiteText,
                 paddingVertical: 12,
                 paddingHorizontal: 10,
                 borderWidth: 1,
                 borderColor: '#fff',
                 borderRadius: 5,
+                paddingRight: 30,
               },
               inputAndroid: {
                 ...styles.input,
-                ...styles.greyText,
+                ...styles.whiteText,
                 paddingVertical: 12,
                 paddingHorizontal: 10,
                 borderWidth: 1,
                 borderColor: '#fff',
                 borderRadius: 5,
+                paddingRight: 30,
               },
               iconContainer: {
                 top: 10,
@@ -101,6 +105,9 @@ const AddTaskScreen = () => {
             }}
             useNativeAndroidPickerStyle={false}
           />
+          <View style={styles.iconContainer}>
+            <FontAwesomeIcon icon={faCaretDown} size={18} color="#fff" />
+          </View>
         </View>
         <Button
           title="Confirm"
@@ -145,8 +152,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFFFFF',
   },
-  greyText: {
-    color: 'grey',
+  whiteText: {
+    color: 'white',
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: '45%',
+    right: 16,
+    //transform: [{ translateY: -9 }], // Center the icon vertically
   },
 });
 

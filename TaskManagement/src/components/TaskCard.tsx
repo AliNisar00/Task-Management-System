@@ -16,10 +16,11 @@ const TaskCard = ({ task }) => {
     });
 
     } catch (error) {
-    console.error('Error fetching tasks:', error);
+      console.error('Error fetching tasks:', error);
     // Handle error, show message to user
     } finally {
-    
+      setIsVisible(false);
+
     }
   };
 
@@ -77,7 +78,7 @@ const TaskCard = ({ task }) => {
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <Button title="Mark as complete" />
+              <Button title="Mark as complete" onPress={() => deleteTask(task.taskId)} />
               <Button title="Delete this task" onPress={() => deleteTask(task.taskId)} />
               <Button title="Cancel" onPress={() => setIsVisible(false)} />
             </View>

@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import TaskCard from '../components/TaskCard';
 
 const HomeScreen = ({ navigation }) => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         fetchTasks();
+        //const interval = setInterval(fetchTasks, 3000); // Fetch tasks every 3 seconds
+        //return () => clearInterval(interval); // Clean up the interval on component unmount
     }, []);
+
+    const onRefresh = () => {
+        setRefreshing(true); // Set refreshing to true when the user pulls down to refresh
+        fetchTasks(); // Fetch tasks when the user pulls down to refresh
+    };
 
     const fetchTasks = async () => {
         setLoading(true);
@@ -39,6 +47,7 @@ const HomeScreen = ({ navigation }) => {
             // Handle error, show message to user
         } finally {
             setLoading(false);
+            setRefreshing(false); // Set refreshing to false when fetch is complete
         }
     };
 
@@ -47,17 +56,30 @@ const HomeScreen = ({ navigation }) => {
             <StatusBar backgroundColor={'black'} />
             <HeaderBar title='Home' />
 
+            <ScrollView
+                contentContainerStyle={styles.scrollViewContent}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                        colors={['#5D3FD3']}
+                        tintColor={'#5D3FD3'}
+                    />
+                }
+            >
+
             {loading ? (
                 <ActivityIndicator size="large" color="#5D3FD3" />
             ) : (
-                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                <View>
                     {tasks.map((task, index) => (
                         <TaskCard key={index} task={task} />
                     ))}
                     {/* Additional padding at the bottom to avoid overlap with tab navigator */}
                     <View style={styles.bottomPadding} />
-                </ScrollView>
+                </View>
             )}
+            </ScrollView>
         </View>
     );
 };

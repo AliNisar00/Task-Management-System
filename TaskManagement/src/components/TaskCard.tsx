@@ -6,6 +6,23 @@ import { LongPressGestureHandler, State } from 'react-native-gesture-handler';
 const TaskCard = ({ task }) => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const deleteTask = async (taskId) => {
+    try {
+      const baseUrl = "http://10.0.2.2:5000/tasks/";
+      const callUrl = baseUrl + taskId
+      //console.log('http://10.0.2.2:5000/tasks/${taskId}')
+      const response = await fetch(callUrl, { // original: 192.168.18.77
+      method: 'DELETE',
+    });
+
+    } catch (error) {
+    console.error('Error fetching tasks:', error);
+    // Handle error, show message to user
+    } finally {
+    
+    }
+  };
+
   // Determine the color based on the priority
   let priorityColor;
   switch (task.priority) {
@@ -61,7 +78,7 @@ const TaskCard = ({ task }) => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Button title="Mark as complete" />
-              <Button title="Delete this task" />
+              <Button title="Delete this task" onPress={() => deleteTask(task.taskId)} />
               <Button title="Cancel" onPress={() => setIsVisible(false)} />
             </View>
           </View>

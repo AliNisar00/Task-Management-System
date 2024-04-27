@@ -10,16 +10,19 @@ const AddTaskScreen = () => {
   const [name, setName] = useState('');
   const [course, setCourse] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
-  const [priority, setPriority] = useState('');
+  const [priority, setPriority] = useState('H');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleAddTask = () => {
     const newTask = { name, course, dueDate: dueDate.toDateString(), priority };
-    settask([...task, newTask]);
+    settask([]);
+    settask([newTask]);
     setName('');
     setCourse('');
     setDueDate(new Date());
     setPriority('');
+
+    console.log(task);
   };
 
   const onChange = (event, selectedDate) => {
@@ -40,14 +43,14 @@ const AddTaskScreen = () => {
           placeholder="Name"
           placeholderTextColor="grey"
           value={name}
-          onChangeText={setName}
+          onChangeText={(name) => setName(name)}
         />
         <TextInput
           style={styles.input}
           placeholder="Course"
           placeholderTextColor="grey"
           value={course}
-          onChangeText={setCourse}
+          onChangeText={(course) => setCourse(course)}
         />
         <View style={styles.datePickerContainer}>
           <Button
@@ -66,13 +69,13 @@ const AddTaskScreen = () => {
         <View style={styles.inputContainer}>
           <Text>Priority</Text>
           <RNPickerSelect
-            value={priority}
-            onValueChange={(value) => setPriority(value)}
             items={[
               { label: 'Priority: High', value: 'H' },
               { label: 'Priority: Medium', value: 'M' },
               { label: 'Priority: Low', value: 'L' },
             ]}
+            value={priority}
+            onValueChange={(value) => setPriority(value)}
             placeholder={{}}
             style={{
               inputIOS: {

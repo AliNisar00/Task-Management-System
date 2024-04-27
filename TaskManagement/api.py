@@ -45,15 +45,6 @@ def login():
     return jsonify(existing_user["_id"]), 200
     # return redirect(url_for('homepage', username=username))
 
-@app.route('/homepage/<user_id>')
-def homepage(user_id):
-    tasks = mongo.db.Task_Details.find({"user_id": ObjectId(user_id)},{"user_id":0})
-
-    #converting the cursor object Tasks to JSON serializable format
-    task_list = [task for task in tasks]
-    #print(task_list)
-    return dumps(task_list)
-
 @app.route('/signup', methods=['POST'])
 def signup():
             username = request.json.get('username')
@@ -97,6 +88,15 @@ def signup():
             mongo.db.Login_Details.insert_one(new_user)
 
             return jsonify({'message': 'Signup successful'}), 201
+
+@app.route('/homepage/<user_id>')
+def homepage(user_id):
+    tasks = mongo.db.Task_Details.find({"user_id": ObjectId(user_id)},{"user_id":0})
+
+    #converting the cursor object Tasks to JSON serializable format
+    task_list = [task for task in tasks]
+    #print(task_list)
+    return dumps(task_list)
             
 @app.route('/tasks/<userid>', methods=['POST'])
 def add_task(userid):
@@ -105,6 +105,9 @@ def add_task(userid):
                 task_course = request.json.get('task_course')
                 task_duedate= request.json.get("task_duedate")
                 task_priority= request.json.get("task_priority")
+                task_prompt= request.json.get("task_prompt")
+                #task_time= Jojo(task_prompt)
+                task_time= 0
 
                 # Check if username, task_name, and task_description are provided
                 if not task_name or not task_course or not task_duedate or not task_priority:
@@ -116,7 +119,8 @@ def add_task(userid):
                     "task_name": task_name,
                     "task_course": task_course,
                     "task_duedate": task_duedate,
-                    "task_priority": task_priority
+                    "task_priority": task_priority,
+                    "task_estimate": task_time
                 }
 
                 # Insert the new task document into the database
@@ -124,9 +128,10 @@ def add_task(userid):
 
                 return jsonify({'message': 'Task added successfully'+" "+str(task.inserted_id)}), 201
 
-
-@app.route('/tasksdel/<task_id>', methods=['DELETE'])
-def delete_task(task_id):
+    
+@app.route('/tasks/<task_id>', methods=['DELETE','PUT'])
+def modify_task(task_id):
+            if request.method == 'DELETE':
                 # Check if task_id is provided
                 if not task_id:
                     return jsonify({'error': 'Task ID is required'}), 400
@@ -140,6 +145,40 @@ def delete_task(task_id):
                 mongo.db.Task_Details.delete_one({'_id': ObjectId(task_id)})
 
                 return jsonify({'message': 'Task deleted successfully'}), 200
+
+            elif request.method == 'PUT':
+                # Check if task_id is provided
+                if not task_id:
+                    return jsonify({'error': 'Task ID is required'}), 400
+
+                # Check if task_id exists in the database
+                existing_task = mongo.db.Task_Details.find_one({'_id': ObjectId(task_id)})
+                if not existing_task:
+                    return jsonify({'error': 'Invalid task ID'}), 404
+
+                # Get the updated task details from the request
+                task_name = request.json.get('task_name')
+                task_course = request.json.get('task_course')
+                task_duedate = request.json.get("task_duedate")
+                task_priority = request.json.get("task_priority")
+                task_prompt = request.json.get("task_prompt")
+                # task_time = Jojo(task_prompt)
+                task_time = 0
+
+                # Check if task_name, task_course, task_duedate, and task_priority are provided
+                if not task_name or not task_course or not task_duedate or not task_priority:
+                    return jsonify({'error': 'Task name, course, due date, and priority are required'}), 400
+
+                # Update the task document in the database
+                mongo.db.Task_Details.update_one({'_id': ObjectId(task_id)}, {'$set': {
+                    'task_name': task_name,
+                    'task_course': task_course,
+                    'task_duedate': task_duedate,
+                    'task_priority': task_priority,
+                    'task_estimate': task_time
+                }})
+
+                return jsonify({'message': 'Task updated successfully'}), 200
 
 #genereating a random 4 digit OTP
 otp= randint(0000,9999)
@@ -155,11 +194,13 @@ def verify():
     mail.send(msg)
     return jsonify("OTP sent to email")
         
-@app.route("/validate", methods=["POST"])
-def validate():
-      user_otp= request.json.get('otp')
-      if otp== int(user_otp):
-            print("Email Verified")
+# @app.route("/validate", methods=["POST","PUT"])
+# def validate():
+#       new_pass= request.json.get("new_pass")
+#       user_otp= request.json.get('otp')
+#       if otp== int(user_otp):
+            
+            
 
         
 

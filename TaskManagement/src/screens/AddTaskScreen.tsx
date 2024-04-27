@@ -6,6 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const AddTaskScreen = () => {
+  /*
+  const addTask = async () => {
+    try {
+      const response = await fetch('http://10.0.2.2:5000/tasks/660e88ce1d3eba857b420554', { // original: 192.168.18.77
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      });
+    } catch (error) {
+      console.log(error);
+      alert('Sign in failed: ' + error.message);
+    } finally {
+      
+    }
+  }
+*/
   const [task, settask] = useState([]);
   const [name, setName] = useState('');
   const [course, setCourse] = useState('');
@@ -23,6 +41,7 @@ const AddTaskScreen = () => {
     setPriority('');
 
     console.log(task);
+    console.log(task[0]["name"])
   };
 
   const onChange = (event, selectedDate) => {

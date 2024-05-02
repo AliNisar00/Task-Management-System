@@ -130,7 +130,7 @@ const AddTaskScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
                 borderWidth: 1,
                 borderColor: '#fff',
-                borderRadius: 5,
+                borderRadius: 10,
                 paddingRight: 30,
               },
               inputAndroid: {
@@ -140,7 +140,7 @@ const AddTaskScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
                 borderWidth: 1,
                 borderColor: '#fff',
-                borderRadius: 5,
+                borderRadius: 10,
                 paddingRight: 30,
               },
               iconContainer: {
@@ -157,6 +157,15 @@ const AddTaskScreen = ({ navigation }) => {
             <FontAwesomeIcon icon={faCaretDown} size={18} color="#fff" />
           </View>
         </View>
+        <TextInput
+          style={styles.essayInput}
+          placeholder="Essay prompt"
+          placeholderTextColor="grey"
+          multiline={true}
+          numberOfLines={8} // Set the number of lines to determine the initial height        
+          value={course}
+          onChangeText={(course) => setCourse(course)}
+        />
         <Button
           title="Confirm"
           onPress={handleAddTask}
@@ -183,7 +192,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 10,
+    padding: 10,
+    color: '#fff',
+  },
+  essayInput: {
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
     padding: 10,
     color: '#fff',
   },

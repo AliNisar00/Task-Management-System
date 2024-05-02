@@ -182,10 +182,10 @@ def predict_time_taken(prompt):
     predicted_time = loaded_model.predict([processed_features])
     return round(predicted_time[0])
 
-prompt= "This is the first part of the research project where each student group is to conduct a literature survey on the themes they have identified to work on. From the World Bank datasets, we have already extracted multiple questions that we are interested in studying. Your task is to conduct a detailed literature survey which will help you understand the work that is done under the theme you are pursuing. You are expected to develop a good understanding of the current work done in the area you have selected. This understanding has to be based on reliable data sources. For this purpose, we will rely on either peer reviewed publications, or on reliable scientific reports published by reputable bodies (e.g. World Bank, WHO etc). The final product of this first phase of research project will be a 1500-2000 word report that will detail the results of your literature review in this field. By the end of this activity, you are expected to have a clear idea how to engage with the data sets you are provided and how to compare them against the published results."
-print(process_prompt(prompt))
-time = predict_time_taken(prompt)
-print(time)
+#prompt= "This is the first part of the research project where each student group is to conduct a literature survey on the themes they have identified to work on. From the World Bank datasets, we have already extracted multiple questions that we are interested in studying. Your task is to conduct a detailed literature survey which will help you understand the work that is done under the theme you are pursuing. You are expected to develop a good understanding of the current work done in the area you have selected. This understanding has to be based on reliable data sources. For this purpose, we will rely on either peer reviewed publications, or on reliable scientific reports published by reputable bodies (e.g. World Bank, WHO etc). The final product of this first phase of research project will be a 1500-2000 word report that will detail the results of your literature review in this field. By the end of this activity, you are expected to have a clear idea how to engage with the data sets you are provided and how to compare them against the published results."
+#print(process_prompt(prompt))
+#time = predict_time_taken(prompt)
+#print(time)
 
 
 

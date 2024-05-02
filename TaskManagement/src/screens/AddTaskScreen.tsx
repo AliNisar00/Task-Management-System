@@ -15,7 +15,7 @@ const AddTaskScreen = ({ navigation }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task_name: task[0].name, task_course: task[0].course, task_duedate: task[0].dueDate, task_priority: task[0].priority }),
+        body: JSON.stringify({ task_name: task[0]?.name, task_course: task[0]?.course, task_duedate: task[0]?.dueDate, task_priority: task[0]?.priority, task_prompt: task[0]?.essayPrompt }),
       });
 
       // Handle the response from your Flask API

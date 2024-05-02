@@ -25,7 +25,7 @@ const TaskCard = ({ task }) => {
   //const currentDate = new Date();
   //const diffInMs = dueDate - currentDate;
   //const remainingHours = Math.ceil(diffInMs / (1000 * 60 * 60));
-  const remainingHours = 8;
+  const remainingHours = task.estTime;
 
   // Determine the color based on the priority
   let priorityColor;

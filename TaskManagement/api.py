@@ -105,7 +105,7 @@ def add_task(userid):
                 task_course = request.json.get('task_course')
                 task_duedate= request.json.get("task_duedate")
                 task_priority= request.json.get("task_priority")
-                task_prompt= request.json.get("task_prompt")
+                #task_prompt= request.json.get("task_prompt")
                 #task_time= Jojo(task_prompt)
                 task_time= 0
 

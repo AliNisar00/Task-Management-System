@@ -2,20 +2,42 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TextInput, Button, Text, StatusBar } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
+import Toast from 'react-native-toast-message';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
-const AddTaskScreen = () => {
-  /*
-  const addTask = async () => {
+const AddTaskScreen = ({ navigation }) => {
+  
+  const addTask = async (task) => {
     try {
       const response = await fetch('http://10.0.2.2:5000/tasks/660e88ce1d3eba857b420554', { // original: 192.168.18.77
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({ task_name: task[0].name, task_course: task[0].course, task_duedate: task[0].dueDate, task_priority: task[0].priority }),
       });
+
+      // Handle the response from your Flask API
+      const data = await response.json();
+      if (response.status == 200) {
+        // Show a toast notification after successful login
+        Toast.show({
+          type: 'success',
+          text1: 'Logged in',
+        });
+  
+        // Navigate to TabNavigator upon successful login
+        navigation.navigate('Home', { userName: data.userName });
+      // Handle authentication errors
+      } else if (response.status == 400) {
+        throw new Error(data.message || 'Username, task name, and task description are required');
+      } else if (response.status == 401) {
+        throw new Error(data.message || 'Incorrect username or password');
+      } else {
+        throw new Error(data.message || 'Unknown error');
+      }
+
     } catch (error) {
       console.log(error);
       alert('Sign in failed: ' + error.message);
@@ -23,7 +45,7 @@ const AddTaskScreen = () => {
       
     }
   }
-*/
+
   const [task, settask] = useState([]);
   const [name, setName] = useState('');
   const [course, setCourse] = useState('');
@@ -31,17 +53,21 @@ const AddTaskScreen = () => {
   const [priority, setPriority] = useState('H');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  //console.log(task[0].Priority)
+
   const handleAddTask = () => {
     const newTask = { name, course, dueDate: dueDate.toDateString(), priority };
-    settask([]);
     settask([newTask]);
     setName('');
     setCourse('');
     setDueDate(new Date());
     setPriority('');
 
-    console.log(task);
-    console.log(task[0]["name"])
+    //console.log(task);
+    //console.log(task[0]["name"])
+
+    addTask(task);
+    //console.log(task)
   };
 
   const onChange = (event, selectedDate) => {

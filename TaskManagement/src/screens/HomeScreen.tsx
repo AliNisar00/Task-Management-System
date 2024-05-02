@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
                 name: task.task_name,
                 course: task.task_course,
                 dueDate: task.task_duedate,
-                priority: task.task_priority
+                priority: task.task_priority,
             }));
             setTasks(processedTasks);
         } catch (error) {

@@ -52,16 +52,18 @@ const AddTaskScreen = ({ navigation }) => {
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState('H');
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [essayPrompt, setEssayPrompt] = useState('');
 
   //console.log(task[0].Priority)
 
   const handleAddTask = () => {
-    const newTask = { name, course, dueDate: dueDate.toDateString(), priority };
+    const newTask = { name, course, dueDate: dueDate.toDateString(), priority, essayPrompt };
     settask([newTask]);
     setName('');
     setCourse('');
     setDueDate(new Date());
     setPriority('');
+    setEssayPrompt('');
 
     //console.log(task);
     //console.log(task[0]["name"])
@@ -163,8 +165,8 @@ const AddTaskScreen = ({ navigation }) => {
           placeholderTextColor="grey"
           multiline={true}
           numberOfLines={8} // Set the number of lines to determine the initial height        
-          value={course}
-          onChangeText={(course) => setCourse(course)}
+          value={essayPrompt}
+          onChangeText={(essayPrompt) => setEssayPrompt(essayPrompt)}
         />
         <Button
           title="Confirm"

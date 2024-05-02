@@ -173,6 +173,7 @@ const AddTaskScreen = ({ navigation }) => {
           onPress={handleAddTask}
         />
       </ScrollView>
+      <View style={styles.bottomPadding} />
     </View>
   );
 };
@@ -227,6 +228,9 @@ const styles = StyleSheet.create({
     top: '45%',
     right: 16,
     //transform: [{ translateY: -9 }], // Center the icon vertically
+  },
+  bottomPadding: {
+    height: 60,
   },
 });
 

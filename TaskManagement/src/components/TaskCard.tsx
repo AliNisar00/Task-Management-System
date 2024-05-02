@@ -9,20 +9,23 @@ const TaskCard = ({ task }) => {
   const deleteTask = async (taskId) => {
     try {
       const baseUrl = "http://10.0.2.2:5000/tasks/";
-      const callUrl = baseUrl + taskId
-      //console.log('http://10.0.2.2:5000/tasks/${taskId}')
-      const response = await fetch(callUrl, { // original: 192.168.18.77
-      method: 'DELETE',
-    });
-
+      const callUrl = baseUrl + taskId;
+      const response = await fetch(callUrl, {
+        method: 'DELETE',
+      });
     } catch (error) {
       console.error('Error fetching tasks:', error);
-    // Handle error, show message to user
     } finally {
       setIsVisible(false);
-
     }
   };
+
+  // Calculate remaining hours
+  //const dueDate = new Date(task.dueDate);
+  //const currentDate = new Date();
+  //const diffInMs = dueDate - currentDate;
+  //const remainingHours = Math.ceil(diffInMs / (1000 * 60 * 60));
+  const remainingHours = 8;
 
   // Determine the color based on the priority
   let priorityColor;
@@ -44,37 +47,38 @@ const TaskCard = ({ task }) => {
     <LongPressGestureHandler
       onHandlerStateChange={({ nativeEvent }) => {
         if (nativeEvent.state === State.ACTIVE) {
-          // Long press detected, show menu
           console.log('Long press detected');
           setIsVisible(true);
         }
       }}
     >
       <View>
-      <LinearGradient
-        colors={['#0a0a2a', '#222244']}
-        style={styles.card}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        {/* Priority indicator */}
-        {task.priority && (
-          <View style={[styles.priorityIndicator, { backgroundColor: priorityColor }]} />
-        )}
+        <LinearGradient
+          colors={['#0a0a2a', '#222244']}
+          style={styles.card}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+          {task.priority && (
+            <View style={[styles.priorityIndicator, { backgroundColor: priorityColor }]} />
+          )}
 
-        {/* Task information */}
-        <View style={styles.textContainer}>
-          <Text style={styles.taskName}>{task.name}</Text>
-          <Text style={styles.course}>{task.course}</Text>
-          <Text style={styles.dueDate}>Due: {task.dueDate}</Text>
-        </View>
-      </LinearGradient>
+          <View style={styles.textContainer}>
+            <Text style={styles.taskName}>{task.name}</Text>
+            <Text style={styles.course}>{task.course}</Text>
+            <Text style={styles.dueDate}>Due: {task.dueDate}</Text>
+          </View>
 
-      <Modal
+          <View style={styles.remainingHoursContainer}>
+            <Text style={styles.remainingHoursLabel}>Est. time required</Text>
+            <Text style={styles.remainingHours}>{remainingHours}h</Text>
+          </View>
+        </LinearGradient>
+
+        <Modal
           animationType="slide"
           transparent={true}
           visible={isVisible}
-          //onRequestClose={false/*handleCloseMenu*/}
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
@@ -83,11 +87,12 @@ const TaskCard = ({ task }) => {
               <Button title="Cancel" onPress={() => setIsVisible(false)} />
             </View>
           </View>
-      </Modal>
-    </View>
-  </LongPressGestureHandler>
+        </Modal>
+      </View>
+    </LongPressGestureHandler>
   );
 };
+
 
 const styles = StyleSheet.create({
   card: {
@@ -143,6 +148,25 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
+  },
+  remainingHoursContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+  },
+  remainingHoursLabel: {
+    fontSize: 12,
+    color: 'white',
+    marginBottom: 2,
+  },
+  remainingHours: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 

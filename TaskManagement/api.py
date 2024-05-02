@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from flask_mail import Mail, Message
 from random import randint
+from model import predict_time_taken
 
 app = Flask(__name__)
 
@@ -106,8 +107,7 @@ def add_task(userid):
                 task_duedate= request.json.get("task_duedate")
                 task_priority= request.json.get("task_priority")
                 #task_prompt= request.json.get("task_prompt")
-                #task_time= Jojo(task_prompt)
-                task_time= 0
+                #task_time= predict_time_taken(task_prompt)
 
                 # Check if username, task_name, and task_description are provided
                 if not task_name or not task_course or not task_duedate or not task_priority:

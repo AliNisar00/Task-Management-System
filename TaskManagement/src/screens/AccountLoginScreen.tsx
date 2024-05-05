@@ -13,7 +13,8 @@ const AccountLoginScreen = ({ navigation }) => {
     setLoading(true);
     try {
       // Call your Flask API to authenticate the user
-      const response = await fetch('http://10.20.5.58:5000/login', { // original: 192.168.18.77
+      // const response = await fetch('http://10.20.5.58:5000/login', { // original: 192.168.18.77 NETWORK CALL
+      const response = await fetch('http://10.20.3.123:5000/login/', { // local call
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

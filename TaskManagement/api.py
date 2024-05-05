@@ -11,13 +11,13 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Tasker"
 
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIK_USE_SSL"]= True
-# app.config["MAIL_USERNAME"] = "your_username"
-app.config["MAIL_PASSWORD"] = "enter pass"
-app.config["MAIL_DEFAULT_SENDER"] = "enter email"
+# app.config["MAIL_SERVER"] = "smtp.gmail.com"
+# app.config["MAIL_PORT"] = 587
+# app.config["MAIL_USE_TLS"] = False
+# app.config["MAIK_USE_SSL"]= True
+# # app.config["MAIL_USERNAME"] = "your_username"
+# app.config["MAIL_PASSWORD"] = "enter pass"
+# app.config["MAIL_DEFAULT_SENDER"] = "enter email"
 
 mongo = PyMongo(app)
 CORS(app)
@@ -111,7 +111,7 @@ def add_task(userid):
 
                 # Check if username, task_name, and task_description are provided
                 if not task_name or not task_course or not task_duedate or not task_priority:
-                    return jsonify({'error': 'Username, task name, and task description are required'}), 400
+                    return jsonify({'error': 'Task name, course, due date, and priority are required'}), 400
 
                 # Create a new task document
                 new_task = {

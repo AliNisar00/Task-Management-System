@@ -18,6 +18,8 @@ const AddTaskScreen = ({ navigation }) => {
         body: JSON.stringify({ task_name: task[0]?.name, task_course: task[0]?.course, task_duedate: task[0]?.dueDate, task_priority: task[0]?.priority, task_prompt: task[0]?.essayPrompt }),
       });
 
+      console.log(task[0])
+
       // Handle the response from your Flask API
       const data = await response.json();
       if (response.status == 200) {
@@ -31,9 +33,7 @@ const AddTaskScreen = ({ navigation }) => {
         navigation.navigate('Home', { userName: data.userName });
       // Handle authentication errors
       } else if (response.status == 400) {
-        throw new Error(data.message || 'Username, task name, and task description are required');
-      } else if (response.status == 401) {
-        throw new Error(data.message || 'Incorrect username or password');
+        throw new Error(data.message || 'Task name, course, due date, and priority are required');
       } else {
         throw new Error(data.message || 'Unknown error');
       }
@@ -161,7 +161,7 @@ const AddTaskScreen = ({ navigation }) => {
         </View>
         <TextInput
           style={styles.essayInput}
-          placeholder="Essay prompt"
+          placeholder="Prompt (if any)"
           placeholderTextColor="grey"
           multiline={true}
           numberOfLines={8} // Set the number of lines to determine the initial height        
@@ -169,7 +169,7 @@ const AddTaskScreen = ({ navigation }) => {
           onChangeText={(essayPrompt) => setEssayPrompt(essayPrompt)}
         />
         <Button
-          title="Confirm"
+          title="Add Task"
           onPress={handleAddTask}
         />
       </ScrollView>

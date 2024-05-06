@@ -11,17 +11,19 @@ import AccountLogin from './src/screens/AccountLoginScreen';
 import AccountSignup from './src/screens/AccountSignupScreen';
 import AccountForgetPassword from './src/screens/AccountForgetPasswordScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import TabNavigator from './src/navigators/TabNavigator';
 
 const Stack = createStackNavigator();
 
 function MainStack() {
   return (
-    <Stack.Navigator initialRouteName={"Login"} screenOptions={ {headerShown: false} }>
+    <Stack.Navigator initialRouteName={"Tab"} screenOptions={ {headerShown: false} }>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="AccountLogin" component={AccountLogin} />
       <Stack.Screen name="AccountSignup" component={AccountSignup} />
       <Stack.Screen name="AccountForgetPassword" component={AccountForgetPassword} />
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Tab" component={TabNavigator} />
     </Stack.Navigator>
   )
 }

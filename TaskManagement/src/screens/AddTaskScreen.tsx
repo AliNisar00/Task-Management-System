@@ -68,7 +68,7 @@ const AddTaskScreen = ({ navigation }) => {
     //console.log(task);
     //console.log(task[0]["name"])
 
-    addTask(task);
+    addTask([newTask]);
     //console.log(task)
   };
 

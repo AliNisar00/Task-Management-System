@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TextInput, Button, Text, StatusBar } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
-import Toast from 'react-native-toast-message';
+import Toast, { SuccessToast } from 'react-native-toast-message';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const AddTaskScreen = ({ navigation }) => {
   
   const addTask = async (task) => {
+    if (essayPrompt == '') {
+      throw new Error('Error: Prompt missing')
+    }
+
     try {
       const response = await fetch('http://10.0.2.2:5000/tasks/660e88ce1d3eba857b420554', { // original: 192.168.18.77
         method: 'POST',
@@ -38,9 +42,10 @@ const AddTaskScreen = ({ navigation }) => {
         throw new Error(data.message || 'Unknown error');
       }
 
-    } catch (error) {
-      console.log(error);
-      alert('Sign in failed: ' + error.message);
+    } catch (message) {
+      console.log(message);
+      alert(message.message);
+      navigation.navigate('Home')
     } finally {
       
     }
@@ -57,6 +62,7 @@ const AddTaskScreen = ({ navigation }) => {
   //console.log(task[0].Priority)
 
   const handleAddTask = () => {
+    
     const newTask = { name, course, dueDate: dueDate.toDateString(), priority, essayPrompt };
     settask([newTask]);
     setName('');
@@ -70,6 +76,7 @@ const AddTaskScreen = ({ navigation }) => {
 
     addTask([newTask]);
     //console.log(task)
+
   };
 
   const onChange = (event, selectedDate) => {
@@ -161,7 +168,7 @@ const AddTaskScreen = ({ navigation }) => {
         </View>
         <TextInput
           style={styles.essayInput}
-          placeholder="Prompt (if any)"
+          placeholder="Enter prompt"
           placeholderTextColor="grey"
           multiline={true}
           numberOfLines={8} // Set the number of lines to determine the initial height        

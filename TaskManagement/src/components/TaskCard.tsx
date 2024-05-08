@@ -37,7 +37,7 @@ const TaskCard = ({ task }) => {
       priorityColor = 'orange';
       break;
     case 'L':
-      priorityColor = 'blue';
+      priorityColor = 'green';
       break;
     default:
       priorityColor = 'transparent'; // Default to transparent if priority is not recognized

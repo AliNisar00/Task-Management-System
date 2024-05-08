@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Modal, Button } from 'react-native';
+import { View, Text, StyleSheet, Modal, Button, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LongPressGestureHandler, State } from 'react-native-gesture-handler';
 
@@ -82,9 +82,20 @@ const TaskCard = ({ task }) => {
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <Button title="Mark as complete" onPress={() => deleteTask(task.taskId)} />
-              <Button title="Delete this task" onPress={() => deleteTask(task.taskId)} />
-              <Button title="Cancel" onPress={() => setIsVisible(false)} />
+              <Pressable style={styles.completeButtonStyle} onPress={() => deleteTask(task.taskId)}>
+                <Text style={styles.buttonTextStyle}>Mark as complete</Text>  
+              </Pressable>
+
+              <Pressable style={styles.deleteButtonStyle} onPress={() => deleteTask(task.taskId)}>
+                <Text style={styles.buttonTextStyle}>Delete this task</Text>  
+              </Pressable>
+              
+              <Pressable style={styles.cancelButtonStyle} onPress={() => setIsVisible(false)}>
+                <Text>Cancel</Text>  
+              </Pressable>
+
+              {/*<Button title="Delete this task" onPress={() => deleteTask(task.taskId)} />*/}
+              {/*<Button title="Cancel" onPress={() => setIsVisible(false)} />*/}
             </View>
           </View>
         </Modal>
@@ -143,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     padding: 20,
     borderRadius: 10,
     width: '80%',
@@ -167,6 +178,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: 'white',
+  },
+  completeButtonStyle: {
+    backgroundColor: 'green',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+  },
+  deleteButtonStyle: {
+    backgroundColor: 'red',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+  },
+  cancelButtonStyle: {
+    backgroundColor: 'grey',
+    width: '40%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+  },
+  buttonTextStyle: {
+    fontSize: 17,
   },
 });
 

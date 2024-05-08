@@ -126,7 +126,7 @@ def add_task(userid):
                 # Insert the new task document into the database
                 task=mongo.db.Task_Details.insert_one(new_task)
 
-                return jsonify({'message': 'Task added successfully'+" "+str(task.inserted_id)}), 201
+                return jsonify({'message': 'Task added successfully'}), 201
 
     
 @app.route('/tasks/<task_id>', methods=['DELETE','PUT'])

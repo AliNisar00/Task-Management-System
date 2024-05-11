@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import TaskCard from '../components/TaskCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation }) => {
     const [tasks, setTasks] = useState([]);
@@ -22,9 +23,10 @@ const HomeScreen = ({ navigation }) => {
     const fetchTasks = async () => {
         setLoading(true);
         try {
-            
+            const userID = await AsyncStorage.getItem('userID');
+            console.log(userID)
             //const response = await fetch('http://10.20.5.58:5000/homepage/660e88ce1d3eba857b420554', { // local device - ERROR
-            const response = await fetch('http://10.0.2.2:5000/homepage/660e88ce1d3eba857b420554', { // android emulator
+            const response = await fetch('http://10.0.2.2:5000/homepage/' + userID, { // android emulator
                 method: 'GET',
             });
             if (!response.ok) {

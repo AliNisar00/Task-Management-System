@@ -33,8 +33,12 @@ const AccountLoginScreen = ({ navigation }) => {
           text1: 'Logged in',
         });
   
+        // Store user ID in Async Storage
+        await AsyncStorage.setItem('userID', data.id);
+        
         // Navigate to TabNavigator upon successful login
         navigation.navigate('Home', { userName: data.userName });
+
       // Handle authentication errors
       } else if (response.status == 400) {
         throw new Error(data.message || 'Missing username and/or password');

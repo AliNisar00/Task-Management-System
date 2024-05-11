@@ -3,7 +3,7 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 from random import randint
 from model import predict_time_taken
 
@@ -21,7 +21,7 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/Tasker"
 
 mongo = PyMongo(app)
 CORS(app)
-mail= Mail(app)
+# mail= Mail(app)
 
 
 @app.route('/login', methods=['POST'])
@@ -42,8 +42,9 @@ def login():
     if existing_user['password'] != password:
         return jsonify({'error': 'Invalid password'}), 401
 
-
-    return jsonify(existing_user["_id"]), 200
+    user = str(existing_user["_id"])
+    return jsonify({"id" : user}), 200
+    #return jsonify(existing_user["_id"]), 200
     # return redirect(url_for('homepage', username=username))
 
 @app.route('/signup', methods=['POST'])
@@ -181,18 +182,18 @@ def modify_task(task_id):
                 return jsonify({'message': 'Task updated successfully'}), 200
 
 #genereating a random 4 digit OTP
-otp= randint(0000,9999)
-@app.route('/verify', methods=["POST"])
-def verify():
-    email = request.json.get('email')
-    msg = Message('OTP Verification', sender="oggyonfire@gmail.com", recipients=[email])
+# otp= randint(0000,9999)
+# @app.route('/verify', methods=["POST"])
+# def verify():
+#     email = request.json.get('email')
+#     msg = Message('OTP Verification', sender="oggyonfire@gmail.com", recipients=[email])
     
-    # Set the body of the email
-    msg.body = f'Your OTP is: {otp}'
+#     # Set the body of the email
+#     msg.body = f'Your OTP is: {otp}'
     
-    # Send the email
-    mail.send(msg)
-    return jsonify("OTP sent to email")
+#     # Send the email
+#     mail.send(msg)
+#     return jsonify("OTP sent to email")
         
 # @app.route("/validate", methods=["POST","PUT"])
 # def validate():

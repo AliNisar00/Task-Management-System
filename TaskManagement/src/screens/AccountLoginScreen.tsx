@@ -35,9 +35,9 @@ const AccountLoginScreen = ({ navigation }) => {
   
         // Store user ID in Async Storage
         await AsyncStorage.setItem('userID', data.id);
-        
+
         // Navigate to TabNavigator upon successful login
-        navigation.navigate('Home', { userName: data.userName });
+        navigation.navigate('Tab', { userName: data.userName });
 
       // Handle authentication errors
       } else if (response.status == 400) {

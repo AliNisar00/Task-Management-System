@@ -38,15 +38,21 @@ const AccountSignup = ({ navigation }) => {
 
       // Handle the response from your Flask API
       const data = await response.json();
-      if (response.status == 201) {
+      if (response.status == 200) {
         // Show a toast notification after successful login
         Toast.show({
           type: 'success',
           text1: 'Logged in',
         });
   
+        // console.log(data.id)
+
+        // Store user ID in Async Storage
+        await AsyncStorage.setItem('userID', data.id);
+
         // Navigate to TabNavigator upon successful login
         navigation.navigate('Tab', { userName: data.userName });
+
       // Handle authentication errors
       } else if (response.status == 400) {
         throw new Error(data.message || 'Missing entries');

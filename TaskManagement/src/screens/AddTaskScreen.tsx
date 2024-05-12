@@ -5,6 +5,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Toast, { SuccessToast } from 'react-native-toast-message';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddTaskScreen = ({ navigation }) => {
   
@@ -14,7 +15,9 @@ const AddTaskScreen = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch('http://10.0.2.2:5000/tasks/660e88ce1d3eba857b420554', { // original: 192.168.18.77
+      const userID = await AsyncStorage.getItem('userID');
+
+      const response = await fetch('http://10.0.2.2:5000/tasks/' + userID, { // original: 192.168.18.77
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

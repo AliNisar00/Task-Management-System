@@ -87,9 +87,13 @@ def signup():
             }
 
             # Insert the new user document into the database
-            mongo.db.Login_Details.insert_one(new_user)
-
-            return jsonify({'message': 'Signup successful'}), 201
+            result = mongo.db.Login_Details.insert_one(new_user)
+            user_id = str(result.inserted_id)
+            return jsonify({'id' : user_id}), 200
+            
+            #user = str(existing_user["_id"])
+            #return jsonify({"id" : user}), 200
+            #return jsonify({'message': 'Signup successful'}), 201
 
 @app.route('/homepage/<user_id>')
 def homepage(user_id):

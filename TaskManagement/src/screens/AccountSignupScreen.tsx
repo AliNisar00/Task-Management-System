@@ -17,7 +17,7 @@ const AccountSignup = ({ navigation }) => {
     try {
       // Call your Flask API to authenticate the user
       // const response = await fetch('http://10.20.5.58:5000/signup', { // original: 192.168.18.77 NETWORK CALL
-      const response = await fetch('http://192.168.18.91:5000/signup', { // local call
+      const response = await fetch('http://192.168.18.91:5000/signup', { // local machine ip call
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
